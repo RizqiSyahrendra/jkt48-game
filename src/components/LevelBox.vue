@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const props = defineProps<{
+export interface ILevelBoxProps {
   title: string
   desc?: string
   isDisabled?: boolean
-}>()
+}
+
+const props = defineProps<ILevelBoxProps>()
 
 const { title, desc = '', isDisabled = false } = props
 const isMouseDown = ref(false)
