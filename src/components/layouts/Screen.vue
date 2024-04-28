@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { toRefs } from 'vue'
+
 const props = defineProps<{
   headingText?: string
 }>()
 
-const { headingText } = props
+const { headingText } = toRefs(props)
 </script>
 
 <template>
