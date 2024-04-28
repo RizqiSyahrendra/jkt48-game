@@ -28,7 +28,8 @@ function selectLevel(id: number) {
 
   setTimeout(() => {
     isLoading.value = false
-  }, 2000)
+    router.replace({ name: 'find-member-game', query: { lvl: id } })
+  }, 500)
 }
 
 const availableModes: ILevelBoxExtended[] = [
