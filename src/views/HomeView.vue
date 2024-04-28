@@ -27,7 +27,7 @@ function onClickStart() {
     <Loader size="lg" />
   </div>
 
-  <div
+  <main
     class="fixed bottom-0 h-64 w-screen flex justify-center bg-transparent transition duration-500 ease-in-out"
     :class="{
       'translate-y-64': isLoading,
@@ -40,5 +40,5 @@ function onClickStart() {
         <Button @click="onClickStart" size="lg" class="min-w-48" text="Let's Get Started" />
       </div>
     </div>
-  </div>
+  </main>
 </template>
