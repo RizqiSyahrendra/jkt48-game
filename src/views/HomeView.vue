@@ -24,7 +24,7 @@ function onClickStart() {
 
 <template>
   <div v-if="isLoading" class="fixed bottom-10 h-64 w-screen flex justify-center">
-    <Loader size="lg" />
+    <Loader size="lg" color="secondary" />
   </div>
 
   <main

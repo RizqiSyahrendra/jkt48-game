@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import images from '@/utils/images'
+import Images from '@/utils/images'
+
 const props = defineProps<{
+  color?: 'primary' | 'secondary'
   size?: 'sm' | 'md' | 'lg' | 'xl'
 }>()
 
-const { size = 'sm' } = props
+const { size = 'sm', color = 'primary' } = props
 
 const sizeObj: Record<typeof size, { w: string; h: string }> = {
   sm: {
@@ -24,8 +26,16 @@ const sizeObj: Record<typeof size, { w: string; h: string }> = {
     h: 'h-28'
   }
 }
+
+const colorObj: Record<typeof color, string> = {
+  primary: 'stroke-primary4',
+  secondary: 'stroke-primary1'
+}
 </script>
 
 <template>
-  <img :src="images.loader" class="animate-spin" :class="[sizeObj[size].w, sizeObj[size].w]" />
+  <Images.loader
+    class="animate-spin"
+    :class="[sizeObj[size].w, sizeObj[size].w, colorObj[color]]"
+  />
 </template>
