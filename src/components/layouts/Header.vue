@@ -16,7 +16,7 @@ watch(route, (newRoute) => {
 
 <template>
   <header
-    class="fixed top-0 left-0 flex w-screen bg-primary4 justify-center transition-all duration-500 ease-in-out"
+    class="fixed top-0 left-0 flex w-screen bg-primary4 justify-center shadow-md transition-all duration-500 ease-in-out"
     :class="{
       'h-[65px]': isTop,
       'h-screen': !isTop
