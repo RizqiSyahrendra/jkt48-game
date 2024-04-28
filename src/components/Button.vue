@@ -30,7 +30,7 @@ const sizeObj: Record<
   },
   lg: {
     px: 'px-2',
-    py: 'py-1',
+    py: 'py-2',
     textSize: 'text-lg'
   }
 }
