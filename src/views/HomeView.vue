@@ -23,12 +23,12 @@ function onClickStart() {
 </script>
 
 <template>
-  <div v-if="isLoading" class="fixed bottom-10 h-64 w-screen flex justify-center">
+  <div v-if="isLoading" class="fixed bottom-10 h-64 w-screen flex justify-center z-20">
     <Loader size="lg" color="secondary" />
   </div>
 
   <main
-    class="fixed bottom-0 h-64 w-screen flex justify-center bg-transparent transition duration-500 ease-in-out"
+    class="fixed bottom-0 h-64 w-screen flex justify-center bg-transparent transition duration-500 ease-in-out z-20"
     :class="{
       'translate-y-64': isLoading,
       'translate-y-0': !isLoading
