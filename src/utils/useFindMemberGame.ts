@@ -16,39 +16,66 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
   const currentStage = ref(1)
   const isDeckLoading = ref(false)
   const memberDeck = ref<typeof param.data>([])
+  const memberQuestioned = ref<IMember | null>(null)
 
-  function nextStage() {
-    stageScore.value[currentStage.value - 1] = 1
+  function submitStageAnswer(id: number) {
+    stageScore.value[currentStage.value - 1] = memberQuestioned.value?.id === id ? 1 : 0
 
     if (currentStage.value === param.totalStage) return
     currentStage.value++
+    setupDeck()
   }
 
-  function setupDeck() {
+  function skipStage() {
+    stageScore.value[currentStage.value - 1] = 0
+
+    if (currentStage.value === param.totalStage) return
+    currentStage.value++
+    setupDeck()
+  }
+
+  async function setupDeck() {
+    // set loading on
     isDeckLoading.value = true
 
-    let availableMemberLength = param.data.length
-    const tempMemberDeck: typeof param.data = []
-    for (let i = 0; i < param.totalMemberInDeck; i++) {
-      const idx = getRandomInt(availableMemberLength)
-      const selectedMember = param.data.splice(idx, 1)
-      if (selectedMember.length > 0) {
-        tempMemberDeck.push(selectedMember[0])
-        availableMemberLength--
+    await new Promise((resolve) => {
+      // randomize member and put in deck
+      const availableMember = [...param.data]
+      let availableMemberLength = availableMember.length
+      const tempMemberDeck: typeof availableMember = []
+      for (let i = 0; i < param.totalMemberInDeck; i++) {
+        const idx = getRandomInt(availableMemberLength)
+        const selectedMember = availableMember.splice(idx, 1)
+        if (selectedMember.length > 0) {
+          tempMemberDeck.push(selectedMember[0])
+          availableMemberLength--
+        }
       }
-    }
+      memberDeck.value = tempMemberDeck
 
-    memberDeck.value = tempMemberDeck
+      // randomize answer
+      const answerIdx = getRandomInt(param.totalMemberInDeck)
+      if (!!tempMemberDeck[answerIdx]) {
+        memberQuestioned.value = tempMemberDeck[answerIdx]
+      }
+      setTimeout(() => {
+        resolve(true)
+      }, 250)
+    })
+
+    // set loading off
     isDeckLoading.value = false
   }
 
   return {
     stageScore,
-    nextStage,
+    skipStage,
+    submitStageAnswer,
     currentStage,
     memberDeck,
     isDeckLoading,
-    setupDeck
+    setupDeck,
+    memberQuestioned
   }
 }
 

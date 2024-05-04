@@ -8,6 +8,7 @@ import { useModal } from '@/utils/useModal'
 import { onMounted } from 'vue'
 import { useFindMemberGame } from '@/utils/useFindMemberGame'
 import members from '@/data/member.json'
+import Loader from '@/components/Loader.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -18,22 +19,33 @@ const { showModal } = useModal()
 
 const totalStage = 10
 const totalMemberInDeck = 16
-const { stageScore, currentStage, setupDeck, memberDeck } = useFindMemberGame({
+const {
+  stageScore,
+  currentStage,
+  setupDeck,
+  memberDeck,
+  memberQuestioned,
+  isDeckLoading,
+  skipStage,
+  submitStageAnswer
+} = useFindMemberGame({
   data: members,
   totalMemberInDeck,
   totalStage
 })
 
 onMounted(() => {
-  setupDeck()
-  // showModal({
-  //   text: 'The rules of this game is simple. Try to find the mentioned JKT48 member inside the provided area!',
-  //   continueButtonText: 'Start!',
-  //   cancelButtonText: 'Back',
-  //   onCancel: () => {
-  //     router.back()
-  //   }
-  // })
+  showModal({
+    text: 'The rules of this game is simple. Try to find the mentioned JKT48 member inside the provided area!',
+    continueButtonText: 'Start!',
+    cancelButtonText: 'Back',
+    onCancel: () => {
+      router.back()
+    },
+    onContinue: () => {
+      setupDeck()
+    }
+  })
 })
 
 function parseQueryLevel(paramQueryLvl: string) {
@@ -62,16 +74,23 @@ function parseQueryLevel(paramQueryLvl: string) {
     </div>
 
     <!-- Game area -->
-    <div class="flex flex-col items-center font-semibold">
+    <div v-if="!!memberQuestioned?.name" class="flex flex-col items-center font-semibold">
       <span class="text-primary3 text-2xl">Find :</span>
-      <span class="text-primary4 text-2xl">Gita Sekar Andarini</span>
+      <span class="text-primary4 text-2xl">{{ memberQuestioned.name }}</span>
     </div>
     <div
       class="flex flex-wrap space-x-2 justify-center w-[50%] rounded-[10px] p-2 mt-4 bg-primary2 mx-auto"
     >
-      <CardMemberImg v-for="(s, idx) in memberDeck" :id="s.id" :key="idx" class="mb-2" />
-      <div class="w-full mt-4 flex justify-center">
-        <Button size="md" color="secondary" text="Skip" class="min-w-[80px]" />
+      <div v-if="isDeckLoading" class="w-full mt-4 flex justify-center">
+        <Loader size="md" />
+      </div>
+
+      <template v-if="!isDeckLoading" v-for="m in memberDeck" :key="m.id">
+        <CardMemberImg @click="() => submitStageAnswer(m.id)" :id="m.id" class="mb-2" />
+      </template>
+
+      <div v-if="!isDeckLoading" class="w-full mt-4 flex justify-center">
+        <Button @click="skipStage" size="md" color="secondary" text="Skip" class="min-w-[80px]" />
       </div>
     </div>
   </Screen>
