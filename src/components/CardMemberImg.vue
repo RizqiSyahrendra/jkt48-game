@@ -1,9 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{
+  id: number
+}>()
+
+const { id } = props
+const imgSrc = `../../img/member/${id}.jpg`
+</script>
 
 <template>
   <div
     class="w-[64px] h-[84px] shadow-md rounded-[10px] hover:cursor-pointer hover:scale-105 transition duration-100 ease-in-out"
   >
-    <img src="../../img/member/1.jpg" class="object-cover w-[64px] h-[84px] rounded-[10px]" />
+    <img :src="imgSrc" class="object-cover w-[64px] h-[84px] rounded-[10px]" />
   </div>
 </template>
