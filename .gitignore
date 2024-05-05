@@ -17,6 +17,8 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
+docker-compose-prod.yml
+
 # Images
 public/img
 

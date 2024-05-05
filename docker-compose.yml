@@ -1,0 +1,8 @@
+services:
+  app:
+    image: jkt48-game-img
+    container_name: jkt48-game
+    hostname: jkt48-game
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
