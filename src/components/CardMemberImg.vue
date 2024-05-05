@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import images from '@/utils/images'
+
 const props = defineProps<{
   id: number
 }>()
 
 const { id } = props
-const imgSrc = `../../img/member/${id}.jpg`
+const imgSrc = `${images.directory.member}/${id}.jpg`
 </script>
 
 <template>
