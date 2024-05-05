@@ -25,7 +25,7 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
   const isDeckLoading = ref(false)
   const memberDeck = ref<typeof param.data>([])
   const memberQuestioned = ref<IMember | null>(null)
-  const { countDownText, setCountDownInSeconds } = useCountDown()
+  const { countDownText, setCountDownInSeconds, clearCountDown } = useCountDown()
 
   const gameSummary = computed<IGameSummary>(() => {
     const summary: IGameSummary = {
@@ -46,6 +46,7 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
   })
 
   function submitStageAnswer(id: number) {
+    clearCountDown()
     setLoading(250)
     stageScore.value[currentStage.value - 1] = memberQuestioned.value?.id === id ? 1 : 0
 
@@ -55,6 +56,7 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
   }
 
   function skipStage() {
+    clearCountDown()
     setLoading(250)
     stageScore.value[currentStage.value - 1] = 0
 

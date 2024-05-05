@@ -66,13 +66,13 @@ function parseQueryLevel(paramQueryLvl: string) {
 function getTimeForEachLevel(level: number): number {
   switch (level) {
     case 1:
-      return 2
+      return 9
 
     case 2:
-      return 4
+      return 6
 
     default:
-      return 6
+      return 3
   }
 }
 
