@@ -38,9 +38,9 @@ const availableModes: ILevelBoxExtended[] = [
 ]
 
 const availableLevels: ILevelBoxExtended[] = [
-  { id: 1, title: 'Level 1', desc: '6 sec for each stage' },
-  { id: 2, title: 'Level 2', desc: '4 sec for each stage' },
-  { id: 3, title: 'Level 3', desc: '2 sec for each stage' }
+  { id: 1, title: 'Level 1', desc: '9 sec for each stage' },
+  { id: 2, title: 'Level 2', desc: '6 sec for each stage' },
+  { id: 3, title: 'Level 3', desc: '3 sec for each stage' }
 ]
 </script>
 
