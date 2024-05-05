@@ -16,7 +16,7 @@ const { isModalVisible, isAnimating, handlePressCancel, handlePressContinue, mod
     }"
   >
     <div
-      class="flex flex-col w-[40%] min-h-[200px] mt-[10%] p-4 rounded-[10px] bg-primary1 transition-all ease-in-out duration-300"
+      class="flex flex-col w-[80%] md:w-[40%] min-h-[200px] mt-[30%] md:mt-[10%] p-4 rounded-[10px] bg-primary1 transition-all ease-in-out duration-300"
       :class="{
         'scale-75': !isAnimating,
         'scale-100': isAnimating

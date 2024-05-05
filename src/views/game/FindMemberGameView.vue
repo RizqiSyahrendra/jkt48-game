@@ -84,9 +84,19 @@ function goBack() {
 <template>
   <Screen>
     <!-- Stage board -->
-    <div class="fixed left-[30px] w-[150px] h-[400px] p-2 bg-primary2 rounded-[10px]">
-      <div class="font-semibold text-xl text-center text-primary4">
-        Stage : {{ currentStage }} / {{ totalStage }}
+    <div
+      class="fixed left-[32px] w-[calc(100%-64px)] md:w-[150px] bottom-2 md:top-[20%] md:h-[400px] p-2 bg-primary2 rounded-[10px]"
+    >
+      <div
+        class="flex justify-between md:justify-center font-semibold text-lg md:text-xl text-primary4"
+      >
+        <span>Stage : {{ currentStage }} / {{ totalStage }}</span>
+        <span
+          v-if="!!stageCountDown && stageCountDown !== '00:00'"
+          class="bg-primary1 px-2 rounded-full"
+        >
+          {{ stageCountDown }}
+        </span>
       </div>
       <div class="mt-4 flex flex-wrap justify-center">
         <template v-for="(s, idx) in stageScore">
@@ -102,11 +112,11 @@ function goBack() {
       v-if="!gameSummary.isFinished && !!memberQuestioned?.name"
       class="flex flex-col items-center font-semibold"
     >
-      <span class="text-primary3 text-2xl">Find :</span>
-      <span class="text-primary4 text-2xl">{{ memberQuestioned.name }}</span>
+      <span class="text-primary3 text-xl md:text-2xl">Find :</span>
+      <span class="text-primary4 text-xl md:text-2xl">{{ memberQuestioned.name }}</span>
     </div>
     <div
-      class="flex flex-wrap space-x-2 justify-center w-[50%] rounded-[10px] p-2 mt-4 bg-primary2 mx-auto"
+      class="flex flex-wrap space-x-2 justify-center w-[100%] md:w-[50%] rounded-[10px] p-2 mt-4 bg-primary2 mx-auto"
     >
       <div v-if="isDeckLoading" class="w-full mt-4 flex justify-center">
         <Loader size="md" />
@@ -142,7 +152,7 @@ function goBack() {
     </div>
     <div
       v-if="!!stageCountDown && stageCountDown !== '00:00'"
-      class="flex justify-center items-center w-[80px] h-[30px] bg-primary2 text-primary4 font-semibold rounded-full mx-auto mt-2"
+      class="hidden md:flex justify-center items-center w-[80px] h-[30px] bg-primary2 text-primary4 font-semibold rounded-full mx-auto mt-2"
     >
       {{ stageCountDown }}
     </div>

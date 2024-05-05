@@ -9,10 +9,10 @@ const { headingText } = toRefs(props)
 </script>
 
 <template>
-  <main class="px-10 py-[100px]">
+  <main class="px-8 md:px-10 py-[70px] md:py-[100px]">
     <div
       v-if="!!headingText"
-      class="flex justify-center font-bold text-2xl md:text-3xl text-primary4"
+      class="flex justify-center font-bold text-2xl md:text-3xl text-primary4 pt-2"
     >
       {{ headingText }}
     </div>
