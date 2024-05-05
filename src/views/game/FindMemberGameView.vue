@@ -85,7 +85,7 @@ function goBack() {
   <Screen>
     <!-- Stage board -->
     <div
-      class="fixed left-[32px] w-[calc(100%-64px)] md:w-[150px] bottom-2 md:top-[20%] md:h-[400px] p-2 bg-primary2 rounded-[10px]"
+      class="fixed left-[32px] w-[calc(100%-64px)] lg:w-[150px] bottom-2 md:bottom-6 lg:top-[20%] lg:h-[400px] p-2 bg-primary2 rounded-[10px]"
     >
       <div
         class="flex justify-between md:justify-center font-semibold text-lg md:text-xl text-primary4"
@@ -93,7 +93,7 @@ function goBack() {
         <span>Stage : {{ currentStage }} / {{ totalStage }}</span>
         <span
           v-if="!!stageCountDown && stageCountDown !== '00:00'"
-          class="bg-primary1 px-2 rounded-full"
+          class="bg-primary1 px-2 rounded-full md:hidden"
         >
           {{ stageCountDown }}
         </span>
@@ -116,7 +116,7 @@ function goBack() {
       <span class="text-primary4 text-xl md:text-2xl">{{ memberQuestioned.name }}</span>
     </div>
     <div
-      class="flex flex-wrap space-x-2 justify-center w-[100%] md:w-[50%] rounded-[10px] p-2 mt-4 bg-primary2 mx-auto"
+      class="flex flex-wrap space-x-2 justify-center w-[100%] md:w-[80%] lg:w-[50%] rounded-[10px] p-2 mt-4 bg-primary2 mx-auto"
     >
       <div v-if="isDeckLoading" class="w-full mt-4 flex justify-center">
         <Loader size="md" />
