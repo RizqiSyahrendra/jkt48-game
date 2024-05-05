@@ -36,6 +36,6 @@ const colorObj: Record<typeof color, string> = {
 <template>
   <Images.loader
     class="animate-spin"
-    :class="[sizeObj[size].w, sizeObj[size].w, colorObj[color]]"
+    :class="[sizeObj[size].w, sizeObj[size].h, colorObj[color]]"
   />
 </template>
