@@ -6,7 +6,7 @@ dayjs.extend(duration)
 
 export function useCountDown() {
   const countDownText = ref('')
-  let countDownInterval: number | null = null
+  let countDownInterval: ReturnType<typeof setInterval> | null = null
 
   function setCountDownInSeconds(sec: number, cb: () => void = () => {}) {
     const endTime = dayjs().add(sec, 'seconds').endOf('seconds')
