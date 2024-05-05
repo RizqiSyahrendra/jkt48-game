@@ -21,6 +21,7 @@ const { showModal } = useModal()
 const totalStage = 10
 const scoreForEachStage = 10
 const totalMemberInDeck = 16
+const timeForEachStageInSecond = getTimeForEachLevel(lvl)
 const {
   stageScore,
   currentStage,
@@ -30,12 +31,14 @@ const {
   isDeckLoading,
   skipStage,
   submitStageAnswer,
-  gameSummary
+  gameSummary,
+  stageCountDown
 } = useFindMemberGame({
   data: members,
   totalMemberInDeck,
   totalStage,
-  scoreForEachStage
+  scoreForEachStage,
+  timeForEachStageInSecond
 })
 
 onMounted(() => {
@@ -57,6 +60,19 @@ function parseQueryLevel(paramQueryLvl: string) {
     return parseInt(paramQueryLvl)
   } catch (error) {
     return 1
+  }
+}
+
+function getTimeForEachLevel(level: number): number {
+  switch (level) {
+    case 1:
+      return 2
+
+    case 2:
+      return 4
+
+    default:
+      return 6
   }
 }
 
@@ -124,11 +140,11 @@ function goBack() {
         </div>
       </div>
     </div>
-    <!-- <div
-      v-if="!!countDownText"
+    <div
+      v-if="!!stageCountDown && stageCountDown !== '00:00'"
       class="flex justify-center items-center w-[80px] h-[30px] bg-primary2 text-primary4 font-semibold rounded-full mx-auto mt-2"
     >
-      {{ countDownText }}
-    </div> -->
+      {{ stageCountDown }}
+    </div>
   </Screen>
 </template>

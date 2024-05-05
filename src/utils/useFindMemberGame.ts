@@ -1,4 +1,5 @@
 import { computed, ref } from 'vue'
+import { useCountDown } from './useCountDown'
 
 interface IMember {
   id: number
@@ -15,6 +16,7 @@ interface UseFindMemberGameProps {
   totalMemberInDeck: number
   totalStage: number
   scoreForEachStage: number
+  timeForEachStageInSecond: number
 }
 
 export function useFindMemberGame(param: UseFindMemberGameProps) {
@@ -23,6 +25,7 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
   const isDeckLoading = ref(false)
   const memberDeck = ref<typeof param.data>([])
   const memberQuestioned = ref<IMember | null>(null)
+  const { countDownText, setCountDownInSeconds } = useCountDown()
 
   const gameSummary = computed<IGameSummary>(() => {
     const summary: IGameSummary = {
@@ -80,6 +83,8 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
     if (!!tempMemberDeck[answerIdx]) {
       memberQuestioned.value = tempMemberDeck[answerIdx]
     }
+
+    setupTimer()
   }
 
   async function setLoading(ms: number) {
@@ -92,6 +97,10 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
     isDeckLoading.value = false
   }
 
+  function setupTimer() {
+    setCountDownInSeconds(param.timeForEachStageInSecond, () => skipStage())
+  }
+
   return {
     stageScore,
     skipStage,
@@ -101,7 +110,8 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
     isDeckLoading,
     setupDeck,
     memberQuestioned,
-    gameSummary
+    gameSummary,
+    stageCountDown: countDownText
   }
 }
 
