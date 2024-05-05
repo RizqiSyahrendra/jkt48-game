@@ -17,7 +17,7 @@ const isMouseDown = ref(false)
   <div
     @mousedown="isMouseDown = true"
     @mouseup="isMouseDown = false"
-    class="flex p-2 w-[40%] bg-primary2 rounded-[10px] border-2 border-primary3 text-primary4 transition duration-75 ease-in-out"
+    class="flex p-2 w-[90%] md:w-[60%] lg:w-[40%] bg-primary2 rounded-[10px] border-2 border-primary3 text-primary4 transition duration-75 ease-in-out"
     :class="{
       'hover:bg-opacity-75 hover:cursor-pointer': !isDisabled,
       'bg-opacity-40': isDisabled,
@@ -26,7 +26,7 @@ const isMouseDown = ref(false)
       'scale-95': isMouseDown && !isDisabled
     }"
   >
-    <div class="flex-1 text-2xl font-semibold items-center">{{ title }}</div>
-    <div class="flex flex-[0.5] justify-end text items-center">{{ desc }}</div>
+    <div class="flex-1 text-xl md:text-2xl font-semibold items-center">{{ title }}</div>
+    <div class="flex flex-[0.7] md:flex-[0.5] justify-end text items-center">{{ desc }}</div>
   </div>
 </template>

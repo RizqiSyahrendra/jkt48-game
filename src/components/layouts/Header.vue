@@ -27,7 +27,7 @@ watch(route, (newRoute) => {
       :class="{
         'translate-y-0': isTop,
         'translate-y-32': !isTop,
-        'scale-75': isTop
+        'scale-[0.6] md:scale-75': isTop
       }"
     >
       JKT48 ゲーム

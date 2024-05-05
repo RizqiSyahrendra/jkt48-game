@@ -34,7 +34,7 @@ function onClickStart() {
       'translate-y-0': !isLoading
     }"
   >
-    <div class="w-[80%] h-full bg-primary1 rounded-t-[50px] flex flex-col items-center">
+    <div class="w-full md:w-[80%] h-full bg-primary1 rounded-t-[50px] flex flex-col items-center">
       <div class="text-primary4 text-2xl font-semibold mt-10">緒にゲームしましょう</div>
       <div class="mt-6">
         <Button @click="onClickStart" size="lg" class="min-w-48" text="Let's Get Started" />
