@@ -13,6 +13,9 @@ export default {
         primary4: "#E74646"
       }
     },
+    fontFamily: {
+      'sans': ['Inter', 'Roboto']
+    },
   },
   plugins: [],
 }

@@ -88,9 +88,7 @@ function goBack() {
     <div
       class="fixed left-[32px] w-[calc(100%-64px)] lg:w-[150px] bottom-2 md:bottom-6 lg:top-[20%] lg:h-[400px] p-2 bg-primary2 rounded-[10px]"
     >
-      <div
-        class="flex justify-between md:justify-center font-semibold text-lg md:text-xl text-primary4"
-      >
+      <div class="flex justify-between md:justify-center font-semibold text-lg text-primary4">
         <span>Stage : {{ currentStage }} / {{ totalStage }}</span>
         <span
           v-if="!!stageCountDown && stageCountDown !== '00:00'"
