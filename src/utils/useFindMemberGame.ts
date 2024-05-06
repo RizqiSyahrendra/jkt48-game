@@ -122,7 +122,7 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
   }
 
   function setupTimer() {
-    setCountDownInSeconds(param.timeForEachStageInSecond, () => skipStage())
+    setCountDownInSeconds(param.timeForEachStageInSecond + 1, () => skipStage())
   }
 
   return {
