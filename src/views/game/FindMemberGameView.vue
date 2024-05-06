@@ -29,6 +29,7 @@ const {
   memberDeck,
   memberQuestioned,
   isDeckLoading,
+  isDeckRotated,
   skipStage,
   submitStageAnswer,
   gameSummary,
@@ -127,7 +128,12 @@ function goBack() {
         v-for="m in memberDeck"
         :key="m.id"
       >
-        <CardMemberImg @click="() => submitStageAnswer(m.id)" :id="m.id" class="mb-2" />
+        <CardMemberImg
+          @click="() => submitStageAnswer(m.id)"
+          :id="m.id"
+          :is-rotated="isDeckRotated"
+          class="mb-2"
+        />
       </template>
 
       <div

@@ -19,10 +19,14 @@ interface UseFindMemberGameProps {
   timeForEachStageInSecond: number
 }
 
+const loadingSpeedMs = 250
+const deckRotationSpeedMs = 200
+
 export function useFindMemberGame(param: UseFindMemberGameProps) {
   const stageScore = ref(initDefaultStageScore(param.totalStage))
   const currentStage = ref(1)
   const isDeckLoading = ref(false)
+  const isDeckRotated = ref(true)
   const memberDeck = ref<typeof param.data>([])
   const memberQuestioned = ref<IMember | null>(null)
   const { countDownText, setCountDownInSeconds, clearCountDown } = useCountDown()
@@ -47,25 +51,40 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
 
   function submitStageAnswer(id: number) {
     clearCountDown()
-    setLoading(250)
     stageScore.value[currentStage.value - 1] = memberQuestioned.value?.id === id ? 1 : 0
+    if (currentStage.value === param.totalStage) {
+      setLoading(loadingSpeedMs)
+      return
+    }
 
-    if (currentStage.value === param.totalStage) return
-    currentStage.value++
-    setupDeck()
+    isDeckRotated.value = true
+    setTimeout(() => {
+      currentStage.value++
+      setupDeck()
+    }, deckRotationSpeedMs - 50)
   }
 
   function skipStage() {
     clearCountDown()
-    setLoading(250)
     stageScore.value[currentStage.value - 1] = 0
+    if (currentStage.value === param.totalStage) {
+      setLoading(loadingSpeedMs)
+      return
+    }
 
-    if (currentStage.value === param.totalStage) return
-    currentStage.value++
-    setupDeck()
+    isDeckRotated.value = true
+    setTimeout(() => {
+      currentStage.value++
+      setupDeck()
+    }, deckRotationSpeedMs - 50)
   }
 
   async function setupDeck() {
+    //set loading at first stage
+    if (currentStage.value === 1) {
+      setLoading(loadingSpeedMs)
+    }
+
     // randomize member and put in deck
     const availableMember = [...param.data]
     let availableMemberLength = availableMember.length
@@ -87,6 +106,9 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
     }
 
     setupTimer()
+    setTimeout(() => {
+      isDeckRotated.value = false
+    }, deckRotationSpeedMs)
   }
 
   async function setLoading(ms: number) {
@@ -110,6 +132,7 @@ export function useFindMemberGame(param: UseFindMemberGameProps) {
     currentStage,
     memberDeck,
     isDeckLoading,
+    isDeckRotated,
     setupDeck,
     memberQuestioned,
     gameSummary,
